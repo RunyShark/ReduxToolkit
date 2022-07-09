@@ -1,2 +1,2 @@
-export * from "../app/ReduxApp";
+export * from "../app";
 export * from "../store";
