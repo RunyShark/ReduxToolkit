@@ -1,10 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { ReduxApp } from "./index";
+import { Provider } from "react-redux";
+import { ReduxApp, store } from "./index";
 import "./index.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <ReduxApp />
+    <Provider store={store}>
+      <ReduxApp />
+    </Provider>
   </React.StrictMode>
 );
