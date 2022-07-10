@@ -1,7 +1,19 @@
-import { useGetTodosQuery } from "../index";
+import React, { useState } from "react";
+import { useGetTodosQuery, useGetTodoByIdQuery } from "../index";
 
 export const TodoApp = () => {
-  const { data: todos = [], isLoading } = useGetTodosQuery();
+  //const { data: todos = [], isLoading } = useGetTodosQuery();
+  const [pages, setPages] = useState(1);
+  const { data: todo, isLoading } = useGetTodoByIdQuery(pages);
+  console.log(todo);
+
+  const nextTodo = () => {
+    setPages(pages + 1);
+  };
+  const PrevTodo = () => {
+    if (pages === 1) return;
+    setPages(pages - 1);
+  };
 
   return (
     <>
@@ -9,8 +21,10 @@ export const TodoApp = () => {
       <hr />
       <h4>isLoading.: {isLoading ? "true" : "false"}</h4>
 
-      <pre>...</pre>
-      <ul>
+      <h2>{JSON.stringify(todo)}</h2>
+      <button onClick={nextTodo}>Next todo</button>
+      <button onClick={PrevTodo}>Previus todo</button>
+      {/* <ul>
         {todos.map(({ id, title, completed }) => (
           <li key={id}>
             <p>{title}</p>
@@ -24,8 +38,7 @@ export const TodoApp = () => {
             </p>
           </li>
         ))}
-      </ul>
-      <button>Next todo</button>
+      </ul> */}
     </>
   );
 };
